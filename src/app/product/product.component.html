@@ -1,0 +1,44 @@
+<div class="alert alert-danger">
+    <input type="text" class="form-control" placeholder="Aranacak kelime" [(ngModel)]="searchKey" />
+    <div class="mt-3" *ngIf="searchKey">Aranan kelime: {{searchKey}}</div>
+</div>
+
+<ng-template [ngTemplateOutlet]="popularproductsList"></ng-template>
+<ng-template [ngTemplateOutlet]="productsList"></ng-template>
+
+<ng-template #productsList>
+<div class="alert alert-warning" >{{products.length}} Adet Ürün Gösteriliyor</div>
+<div class="row">
+    <div class="col-lg-4 mb-4" *ngFor="let item of products | productspipe:searchKey">
+        <div class="product h-100">
+            <div class="product_image" style="background-image: url(assets/img/{{item.imageUrl}})"></div>
+            <div class="product_brand">{{item.brand | uppercase}}</div>
+            <div class="product_title">{{item.title | summary:10}}</div>
+            <div class="product_price">{{item.price | currency:"TRY"}}<!--localization yapmak gerekir --></div>
+            <div class="d-grid gap-2 mx-auto">
+                <button class="btn btn-success" (click)="addToChart($event,item)">Sepete Ekle</button>
+                <button class="btn btn-warning">Detay</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+</ng-template>
+<ng-template #popularproductsList>
+    <div class="alert alert-warning" >{{popularProducts.length}} Adet Ürün Gösteriliyor</div>
+    <div class="row">
+        <div class="col-lg-4 mb-4" *ngFor="let item of popularProducts | productspipe:searchKey">
+            <div class="product h-100">
+                <div class="product_image" style="background-image: url(assets/img/{{item.imageUrl}})"></div>
+                <div class="product_brand">{{item.brand | uppercase}}</div>
+                <div class="product_title">{{item.title | summary:10}}</div>
+                <div class="product_price">{{item.price | currency:"TRY"}}<!--localization yapmak gerekir --></div>
+                <div class="d-grid gap-2 mx-auto">
+                    <button class="btn btn-success" >Sepete Ekle</button>
+                    <button class="btn btn-warning">Detay</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </ng-template>
