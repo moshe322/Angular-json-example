@@ -14,4 +14,7 @@ steps:
 - script: |
     npm install
     npm run build
+    ls -la
+    cd dist
+    ls -la
   displayName: 'npm install and build'
