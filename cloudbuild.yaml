@@ -1,0 +1,22 @@
+steps:
+  # Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['install']
+
+  # Run Angular build
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'build', '--', '--configuration=production']
+
+  # Deploy to Firebase Hosting (if using Firebase)
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud auth application-default login
+        firebase deploy --only hosting
+
+artifacts:
+  objects:
+    location: 'gs://$PROJECT_ID-angular-builds'
+    paths: ['dist/**']
