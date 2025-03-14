@@ -27,7 +27,8 @@ steps:
       - '--allow-unauthenticated'
 
 options:
-  logging: CLOUD_LOGGING_ONLY  # Fixes the "build must specify logsBucket" error
+  logging: CLOUD_LOGGING_ONLY  # Fixes the logging issue
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
 
 timeout: 900s  # Set timeout to 15 minutes
 
