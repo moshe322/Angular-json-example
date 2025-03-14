@@ -27,10 +27,9 @@ steps:
       - '--allow-unauthenticated'
 
 options:
-  logging: CLOUD_LOGGING_ONLY  # Fixes the logging issue
-  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+  logging: NONE
 
-timeout: 900s  # Set timeout to 15 minutes
+#timeout: 900s  # Set timeout to 15 minutes
 
 images:
   - 'gcr.io/$PROJECT_ID/angular-app'
